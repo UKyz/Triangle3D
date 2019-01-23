@@ -141,3 +141,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+.idea/codeStyles/
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/triangle3D.iml
+.idea/*
