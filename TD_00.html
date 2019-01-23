@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebGL</title>
+  <script id="vertexShader" type="text/vertex-code">
+        // todo: ajouter ici le code de votre vertex shader
+    </script>
+  <script id="fragmentShader" type="text/fragment-code">
+        // todo: ajouter ici le code de votre pixel shader
+    </script>
+
+  <script type="text/javascript">
+    var gl, canvas;
+    function onPageLoaded() {
+      canvas = document.getElementById("mainCanvas");
+      try {
+        gl = canvas.getContext("webgl");
+        if (!gl)
+          gl = canvas.getContext("experimental-webgl");
+      } catch (e) {
+        console.error("Crap exception while trying to get WebGL", e);
+      }
+      if (!gl) {
+        alert("Crap WebGL is not enabled or not supported");
+        return;
+      }
+      gl.clearColor(0.0, 0.0, 0.0, 1.0);
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      initialize();
+      render();
+    }
+
+    window.requestAnimFrame = window.requestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      window.oRequestAnimationFrame ||
+      window.msRequestAnimationFrame ||
+      function (callback, element) {
+        window.setTimeout(callback, 1000 / 60);
+      };
+
+    function getShader(programID, type) {
+      var code = document.getElementById(programID);
+      var codeStr = "";
+      var codeChild = code.firstChild;
+      while (codeChild) {
+        if (codeChild.nodeType == 3)
+          codeStr += codeChild.textContent;
+        codeChild = codeChild.nextSibling;
+      }
+      var shader = null;
+      /* todo:
+       créer un shader en fonction du type passé en paramètre
+       assigner la source du shader depuis codeStr
+       compiler le shader
+       vérifier que la compilation s'est bien passée
+       */
+      return shader;
+    }
+
+    var positionBuffer, program;
+    function initialize() {
+      /* todo:
+       créer un array buffer (dans la variable positionBuffer)
+       remplir le buffer avec 1 triangle (en coordonnées écran)
+       */
+
+      var vertexShader = getShader("vertexShader", gl.VERTEX_SHADER);
+      var fragmentShader = getShader("fragmentShader", gl.FRAGMENT_SHADER);
+
+      /* todo:
+       créer un programme (dans la variable program)
+       lui attacher le vertex et le pixel shader
+       le linker
+       vérifier que le link s'est bien passé
+       récupérer la location de l'attribut "position" (dans la variable positionAttributeLocation)
+       */
+    }
+
+    function render() {
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+      /* todo:
+       activer le program
+       activer le buffer de position
+       configurer le buffer de position
+       lancer le draw call
+       */
+      requestAnimFrame(render);
+    }
+  </script>
+</head>
+<body onload="onPageLoaded();" oncontextmenu="return false;">
+<canvas id="mainCanvas" width="500px" height="500px"></canvas>
+</body>
+</html>
